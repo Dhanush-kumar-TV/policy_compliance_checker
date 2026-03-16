@@ -1,0 +1,14 @@
+{
+  "scenario_id": "10",
+  "seed": 42,
+  "description": "Completely non-compliant policy",
+  "input": {
+    "policy_text": "This is a generic document with no compliance controls."
+  },
+  "expected_outcome": {
+    "compliance_score_min": 0.0,
+    "grade": "F",
+    "risk_level": "Critical",
+    "violations_max": 20
+  }
+}

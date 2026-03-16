@@ -1,0 +1,14 @@
+{
+  "scenario_id": "02",
+  "seed": 42,
+  "description": "Missing data retention clause",
+  "input": {
+    "policy_text": "## Privacy Policy\nThis is a dedicated privacy policy section covering all personal data and data subject rights.\n\n## Access Control\nWe enforce strict access control using role-based access to ensure proper authorization.\n\n## GDPR Compliance\nWe strictly comply with the direct General Data Protection regulation and standard GDPR rules.\n\n## Incident Response\nOur incident response plan outlines immediate breach notification procedures.\n\n## Audit Logging\nEvery action generates an audit log to maintain a complete audit trail.\n\n## Employee Training\nAll staff must undergo regular compliance training and security awareness education.\n\n## Encryption\nAll sensitive information requires TLS encryption and robust cryptography.\n\n## Consent Mechanism\nUsers must explicitly opt-in via a consent form, forming a binding user agreement.\n\n## Policy Review\nAn annual review and policy update cycle ensures everything remains current.\n\n## Vendor Management\nA comprehensive third-party vendor assessment limits supplier risks.\n\n## Breach Notification\nWe adhere to a mandatory 72 hours notification timeline.\n\n## Right to Erasure\nUsers can submit a deletion request to exercise their right to be forgotten.\n\n## Data Minimization\nOnly strictly necessary and minimal data is collected from users.\n\n## Password Policy\nOur password policy enforces significant length and complexity.\n\n## MFA Requirement\nWe mandate a multi-factor authentication (MFA) requirement for all users.\n\n## Vulnerability Management\nWeekly vulnerability scans and penetration testing are part of our process.\n\n## Business Continuity\nOur business continuity plan (BCP) includes comprehensive disaster recovery protocols.\n\n## Data Classification\nWe enforce a structured data classification system dividing public and restricted data.\n\n## Whistleblower Policy\nWe maintain a secure whistleblower hotline for anonymous reporting of misconduct."
+  },
+  "expected_outcome": {
+    "compliance_score_min": 90.0,
+    "grade": "A",
+    "risk_level": "Low",
+    "violations_max": 1
+  }
+}

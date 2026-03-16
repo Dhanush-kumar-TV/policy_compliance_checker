@@ -1,0 +1,182 @@
+[
+  {
+    "rule_id": "R001",
+    "category": "Data Privacy",
+    "name": "Privacy Policy Section",
+    "description": "Policy must contain a dedicated privacy policy section",
+    "keywords": ["privacy policy", "personal data", "data subject"],
+    "severity": "critical",
+    "remediation": "Add a dedicated Privacy Policy section covering data subject rights"
+  },
+  {
+    "rule_id": "R002",
+    "category": "Data Retention",
+    "name": "Data Retention Period",
+    "description": "Policy must specify data retention periods",
+    "keywords": ["retention period", "data retention", "retain data", "storage duration"],
+    "severity": "high",
+    "remediation": "Define explicit data retention periods for all data categories"
+  },
+  {
+    "rule_id": "R003",
+    "category": "Security",
+    "name": "Access Control Policy",
+    "description": "Policy must define access control rules",
+    "keywords": ["access control", "role-based access", "RBAC", "authorization"],
+    "severity": "critical",
+    "remediation": "Add an Access Control section with role-based access definitions"
+  },
+  {
+    "rule_id": "R004",
+    "category": "Compliance",
+    "name": "GDPR Reference",
+    "description": "Policy must reference GDPR compliance",
+    "keywords": ["GDPR", "General Data Protection", "data protection regulation"],
+    "severity": "high",
+    "remediation": "Include explicit GDPR compliance statement and obligations"
+  },
+  {
+    "rule_id": "R005",
+    "category": "Incident Response",
+    "name": "Incident Response Plan",
+    "description": "Policy must define an incident response procedure",
+    "keywords": ["incident response", "breach notification", "security incident"],
+    "severity": "critical",
+    "remediation": "Add an Incident Response section with escalation procedures"
+  },
+  {
+    "rule_id": "R006",
+    "category": "Audit",
+    "name": "Audit Logging Requirement",
+    "description": "Policy must require audit logging of system access",
+    "keywords": ["audit log", "audit trail", "logging", "access log"],
+    "severity": "high",
+    "remediation": "Define audit logging requirements including retention of audit records"
+  },
+  {
+    "rule_id": "R007",
+    "category": "Training",
+    "name": "Employee Training Requirement",
+    "description": "Policy must mandate security/compliance training",
+    "keywords": ["training", "awareness", "employee education", "compliance training"],
+    "severity": "medium",
+    "remediation": "Add mandatory annual compliance training requirement for all staff"
+  },
+  {
+    "rule_id": "R008",
+    "category": "Security",
+    "name": "Encryption Policy",
+    "description": "Policy must specify encryption requirements",
+    "keywords": ["encryption", "encrypt", "TLS", "AES", "cryptography"],
+    "severity": "critical",
+    "remediation": "Define encryption standards for data at rest and in transit"
+  },
+  {
+    "rule_id": "R009",
+    "category": "Data Privacy",
+    "name": "Consent Mechanism",
+    "description": "Policy must describe user consent collection",
+    "keywords": ["consent", "opt-in", "opt-out", "user agreement"],
+    "severity": "high",
+    "remediation": "Add explicit consent collection and management procedures"
+  },
+  {
+    "rule_id": "R010",
+    "category": "Governance",
+    "name": "Policy Review Cycle",
+    "description": "Policy must specify a review/update schedule",
+    "keywords": ["review", "annual review", "policy update", "revision"],
+    "severity": "medium",
+    "remediation": "Add a policy review schedule (minimum annual)"
+  },
+  {
+    "rule_id": "R011",
+    "category": "Third-Party",
+    "name": "Vendor Management",
+    "description": "Policy must specify third-party vendor management standards",
+    "keywords": ["third-party", "vendor", "supplier", "subcontractor"],
+    "severity": "high",
+    "remediation": "Define security standards and assessment procedures for third-party vendors"
+  },
+  {
+    "rule_id": "R012",
+    "category": "Incident Response",
+    "name": "Breach Notification Timeline",
+    "description": "Policy must state the timeline for breach notification",
+    "keywords": ["72 hours", "notification timeline", "report to authority"],
+    "severity": "critical",
+    "remediation": "Specify the maximum timeline (e.g., 72 hours) for notifying authorities of a data breach"
+  },
+  {
+    "rule_id": "R013",
+    "category": "Data Privacy",
+    "name": "Right to Erasure",
+    "description": "Policy must afford users the right to erasure (right to be forgotten)",
+    "keywords": ["erasure", "right to be forgotten", "deletion request"],
+    "severity": "high",
+    "remediation": "Include provisions allowing data subjects to request deletion of their personal data"
+  },
+  {
+    "rule_id": "R014",
+    "category": "Data Privacy",
+    "name": "Data Minimization",
+    "description": "Policy must adhere to the principle of data minimization",
+    "keywords": ["data minimization", "strictly necessary", "minimal data"],
+    "severity": "medium",
+    "remediation": "Add a statement ensuring only strictly necessary data is collected for specified purposes"
+  },
+  {
+    "rule_id": "R015",
+    "category": "Security",
+    "name": "Password Policy",
+    "description": "Policy must specify strong password requirements",
+    "keywords": ["password policy", "password complexity", "length and complexity"],
+    "severity": "high",
+    "remediation": "Define minimum password length, complexity, and rotation requirements"
+  },
+  {
+    "rule_id": "R016",
+    "category": "Security",
+    "name": "MFA Requirement",
+    "description": "Policy must require Multi-Factor Authentication",
+    "keywords": ["MFA", "multi-factor", "two-factor", "2FA"],
+    "severity": "critical",
+    "remediation": "Mandate the use of MFA for all system access, especially privileged accounts"
+  },
+  {
+    "rule_id": "R017",
+    "category": "Security",
+    "name": "Vulnerability Management",
+    "description": "Policy must outline a vulnerability management program",
+    "keywords": ["vulnerability", "patch management", "penetration testing"],
+    "severity": "high",
+    "remediation": "Define procedures for regular vulnerability scanning and prompt patch application"
+  },
+  {
+    "rule_id": "R018",
+    "category": "Governance",
+    "name": "Business Continuity",
+    "description": "Policy must include a business continuity or disaster recovery plan",
+    "keywords": ["business continuity", "BCP", "disaster recovery", "DRP"],
+    "severity": "high",
+    "remediation": "Add requirements for business continuity planning and regular testing"
+  },
+  {
+    "rule_id": "R019",
+    "category": "Governance",
+    "name": "Data Classification",
+    "description": "Policy must define a data classification schema",
+    "keywords": ["data classification", "public", "confidential", "restricted"],
+    "severity": "medium",
+    "remediation": "Create a data classification framework (e.g., Public, Internal, Confidential)"
+  },
+  {
+    "rule_id": "R020",
+    "category": "Compliance",
+    "name": "Whistleblower Policy",
+    "description": "Policy must contain a whistleblower protection mechanism",
+    "keywords": ["whistleblower", "report misconduct", "anonymous reporting"],
+    "severity": "low",
+    "remediation": "Establish a secure, anonymous channel for employees to report compliance violations without retaliation"
+  }
+]

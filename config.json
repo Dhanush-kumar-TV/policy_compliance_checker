@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "scenario_id": "01",
+  "max_steps": 20,
+  "agent_mode": "multi",
+  "tool_timeout_seconds": 10,
+  "llm_model": "claude-sonnet-4-20250514",
+  "compliance_rules_path": "checklist/compliance_rules.json",
+  "log_dir": "logs/runs"
+}
