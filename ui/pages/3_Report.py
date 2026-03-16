@@ -3,64 +3,119 @@ import json
 import plotly.graph_objects as go
 import sys; import os; sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
-st.markdown('<div class="app-header">3. COMPLIANCE REPORT</div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="app-header">
+    <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 2.5rem; color: #1152d4;">policy</span>
+    Executive Compliance Report
+</div>
+""", unsafe_allow_html=True)
 
 if not st.session_state.report:
-    st.warning("No generated report found. Please run a compliance check in the Input section.")
-    if st.button("Go to Input ➔", type="primary"):
+    st.markdown('<div class="bw-card" style="text-align:center;">', unsafe_allow_html=True)
+    st.warning("No generated report found. Please run a compliance check in the Policy Dashboard.")
+    if st.button("GO TO DASHBOARD ➔", type="primary"):
         st.switch_page("pages/1_Input.py")
+    st.markdown('</div>', unsafe_allow_html=True)
     st.stop()
 
 rep = st.session_state.report
 
-st.markdown('<div class="panel-label">// OVERVIEW SUMMARY</div>', unsafe_allow_html=True)
-r_c1, r_c2, r_c3 = st.columns([2, 1, 3])
+# ---------------------------------------------------------
+# EXECUTIVE TOPLINE (Stitch Cards)
+# ---------------------------------------------------------
+st.markdown('<div class="panel-label">Executive Topline</div>', unsafe_allow_html=True)
+t_col1, t_col2, t_col3 = st.columns(3)
 
-with r_c1:
-    color_sub = "#64748b" if st.session_state.theme == "light" else "#888"
-    st.markdown(f'<div class="score-large">{rep["compliance_score"]}</div><div style="color:{color_sub};font-size:1rem;font-weight:700;letter-spacing:0.15em;margin-top:0.8rem;">COMPLIANCE SCORE</div>', unsafe_allow_html=True)
+with t_col1:
+    st.markdown(f"""
+    <div class="bw-card" style="text-align:center; border-top: 4px solid #1152d4;">
+        <div style="font-size: 0.75rem; color:#94a3b8; font-weight:700;">COMPLIANCE SCORE</div>
+        <div style="font-size: 3.5rem; font-weight:900; color:#f1f5f9; margin: 0.5rem 0;">{rep["compliance_score"]}</div>
+        <div style="font-size: 0.8rem; color:#1152d4; font-weight:700;">OUT OF 100</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-with r_c2:
-    st.markdown(f'<div class="grade-badge">{rep["grade"]}</div>', unsafe_allow_html=True)
+with t_col2:
+    st.markdown(f"""
+    <div class="bw-card" style="text-align:center; border-top: 4px solid #10b981;">
+        <div style="font-size: 0.75rem; color:#94a3b8; font-weight:700;">AI GRADE</div>
+        <div style="font-size: 3.5rem; font-weight:900; color:#10b981; margin: 0.5rem 0;">{rep["grade"]}</div>
+        <div style="font-size: 0.8rem; color:#94a3b8; font-weight:700;">BASED ON LLM ANALYSIS</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-with r_c3:
-    risk_color = "#db2777" if st.session_state.theme == "light" else "#f472b6"
-    st.markdown(f'<br><div style="font-size: 1.5rem; font-weight: 800; color: {risk_color};">RISK ASSESSMENT: {rep["risk_level"].upper()}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="bw-card" style="margin-top:1rem;"><i>{rep["executive_summary"]}</i></div>', unsafe_allow_html=True)
+with t_col3:
+    risk_color = "#ef4444" if rep["risk_level"].lower() in ["high", "critical"] else "#eab308"
+    st.markdown(f"""
+    <div class="bw-card" style="text-align:center; border-top: 4px solid {risk_color};">
+        <div style="font-size: 0.75rem; color:#94a3b8; font-weight:700;">RISK LEVEL</div>
+        <div style="font-size: 1.5rem; font-weight:900; color:{risk_color}; margin: 1.5rem 0;">{rep["risk_level"].upper()}</div>
+        <div style="font-size: 0.8rem; color:#94a3b8; font-weight:700;">AUTO-ASSESSED</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown('<div class="panel-label">Executive Summary</div>', unsafe_allow_html=True)
+st.markdown(f"""
+<div class="bw-card">
+    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #cbd5e1;">
+        "{rep["executive_summary"]}"
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-c_act1, c_act2 = st.columns([1, 1])
+# ---------------------------------------------------------
+# REMEDIATION & FINDINGS
+# ---------------------------------------------------------
+st.markdown('<div class="panel-label">Findings & Remediation</div>', unsafe_allow_html=True)
+c_act1, c_act2 = st.columns([1.5, 1])
 
 with c_act1:
+    remediation_html = [
+        '<div class="bw-card" style="min-height:300px;">',
+        '<h4>Top Remediation Steps</h4>'
+    ]
     if rep.get("top_3_critical_actions"):
-        st.markdown('<div class="panel-label">// CRITICAL REMEDIATIONS REQUIRED</div>', unsafe_allow_html=True)
         for i, act in enumerate(rep["top_3_critical_actions"]):
-            marker_color = "#dc2626" if st.session_state.theme == "light" else "#ff0055"
-            st.markdown(f"<div style='margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700;'><span style='color: {marker_color};'>{i+1}.</span> {act}</div>", unsafe_allow_html=True)
+            remediation_html.append(f"""
+<div style="display:flex; gap:15px; margin-bottom:1.5rem; align-items:flex-start;">
+    <div style="background:#1152d4; color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:bold;">{i+1}</div>
+    <div style="font-size:1rem; color:#f1f5f9; font-weight:500;">{act}</div>
+</div>
+            """)
     else:
-        st.success("No critical remediations required. Excellent work!")
+        remediation_html.append('<div style="color:#10b981; font-weight:600; padding:1rem 0;">No active violations found.</div>')
+    remediation_html.append('</div>')
+    st.markdown("".join(remediation_html), unsafe_allow_html=True)
 
 with c_act2:
-    st.markdown('<div class="panel-label">// QUICK METRICS</div>', unsafe_allow_html=True)
-    st.metric("RULES PASSED", f"{rep['passed_rules']} / {rep['total_rules']}")
     crit_count = sum(1 for vlist in rep.get("violations_by_category", {}).values() for v in vlist if v['severity'].lower() == 'critical')
-    st.metric("CRITICAL VIOLATIONS", crit_count)
+    st.markdown(f"""
+<div class="bw-card" style="min-height:300px;">
+    <h4>Analysis Metrics</h4>
+    <div style="margin-top:20px;">
+        <div style="font-size:0.75rem; color:#94a3b8; font-weight:700; text-transform:uppercase; margin-bottom:5px;">Rules Passed</div>
+        <div style="font-size:1.8rem; font-weight:900; color:#f1f5f9;">{rep['passed_rules']} / {rep['total_rules']}</div>
+    </div>
+    <div style="margin-top:25px;">
+        <div style="font-size:0.75rem; color:#94a3b8; font-weight:700; text-transform:uppercase; margin-bottom:5px;">Critical Violations</div>
+        <div style="font-size:1.8rem; font-weight:900; color:{'#ef4444' if crit_count > 0 else '#10b981'};">{crit_count}</div>
+    </div>
+</div>
+    """, unsafe_allow_html=True)
 
-st.markdown("<hr>", unsafe_allow_html=True)
+# ---------------------------------------------------------
+# DETAILED REGISTER (Table)
+# ---------------------------------------------------------
+st.markdown('<div class="panel-label">Policy Violation Register</div>', unsafe_allow_html=True)
+st.markdown('<div class="bw-card">', unsafe_allow_html=True)
 
-st.markdown('<div class="panel-label">// DETAILED VIOLATIONS REGISTER</div>', unsafe_allow_html=True)
-
-    border_color = "#ddd" if st.session_state.theme == "light" else "#333"
-    table_html = [
-        "<table style='width: 100%; border-collapse: collapse; margin-bottom: 2rem;'>",
-        "<thead>",
-        f"<tr style='border-bottom: 2px solid {border_color}; text-align: left;'>",
-    "<th>RULE ID</th>",
-    "<th>RULE NAME</th>",
-    "<th>CATEGORY</th>",
-    "<th>SEVERITY</th>",
-    "<th>REMEDIATION</th>",
+table_html = [
+    "<table style='width: 100%; border-collapse: collapse;'>",
+    "<thead>",
+    "<tr style='border-bottom: 2px solid #2d3a54; text-align: left; color:#94a3b8; font-size:0.75rem; text-transform:uppercase;'>",
+    "<th style='padding:12px;'>Rule</th>",
+    "<th style='padding:12px;'>Severity</th>",
+    "<th style='padding:12px;'>Remediation Strategy</th>",
     "</tr>",
     "</thead>",
     "<tbody>"
@@ -68,39 +123,47 @@ st.markdown('<div class="panel-label">// DETAILED VIOLATIONS REGISTER</div>', un
 
 has_violations = False
 for cat, v_list in rep.get("violations_by_category", {}).items():
-    if v_list:
-        has_violations = True
     for v in v_list:
-        cls = f"violation-{v['severity'].lower()}"
-        row = (
-            f"<tr class='{cls}'>"
-            f"<td><strong>{v['rule_id']}</strong></td>"
-            f"<td>{v['rule_name']}</td>"
-            f"<td>{v['category']}</td>"
-            f"<td style='text-transform: uppercase;'>{v['severity']}</td>"
-            f"<td>{v['remediation']}</td>"
-            f"</tr>"
-        )
-        table_html.append(row)
+        has_violations = True
+        sev = v['severity'].upper()
+        sev_color = "#ef4444" if sev == "CRITICAL" else "#f97316" if sev == "HIGH" else "#eab308"
         
-table_html.append("</tbody></table>")
+        row = f"""
+<tr style="border-bottom: 1px solid #2d3a54;">
+<td style="padding:15px;">
+<div style="font-weight:700; color:#f1f5f9;">{v['rule_id']}</div>
+<div style="font-size:0.8rem; color:#94a3b8;">{v['rule_name']}</div>
+</td>
+<td style="padding:15px;">
+<span style="color:{sev_color}; font-weight:900; font-size:0.75rem;">● {sev}</span>
+</td>
+<td style="padding:15px; font-size:0.9rem; color:#cbd5e1;">{v['remediation']}</td>
+</tr>
+"""
+        table_html.append(row)
 
-if has_violations:
-    st.markdown("".join(table_html), unsafe_allow_html=True)
+if not has_violations:
+    st.markdown("<div style='text-align:center; padding:2rem; color:#10b981;'>No violations detected. Document is 100% compliant.</div>", unsafe_allow_html=True)
 else:
-    st.info("No policy violations detected. This document is fully compliant.")
+    table_html.append("</tbody></table>")
+    st.markdown("".join(table_html), unsafe_allow_html=True)
 
-st.markdown("---")
+st.markdown('</div>', unsafe_allow_html=True)
 
-t1, t2, t3 = st.columns(3)
-with t1:
+# ---------------------------------------------------------
+# FOOTER / EXPORT
+# ---------------------------------------------------------
+st.markdown("<br>", unsafe_allow_html=True)
+f_col1, f_col2, f_col3 = st.columns(3)
+
+with f_col1:
     report_json = json.dumps(rep, indent=2)
-    st.download_button("⬇ DOWNLOAD JSON REPORT", report_json, file_name=f"report_{st.session_state.run_id}.json", mime="application/json", use_container_width=True)
+    st.download_button("⬇ EXPORT JSON", report_json, file_name=f"report_{st.session_state.run_id}.json", mime="application/json", use_container_width=True)
 
-with t2:
-    if st.button("View Agent Logs ➔", type="secondary", use_container_width=True):
+with f_col2:
+    if st.button("LIVE ENGINE LOGS", type="secondary", use_container_width=True):
         st.switch_page("pages/2_Activity.py")
         
-with t3:
-    if st.button("Advanced Analytics Dashboard ➔", type="primary", use_container_width=True):
+with f_col3:
+    if st.button("ADVANCED ANALYTICS", type="primary", use_container_width=True):
         st.switch_page("pages/4_Advanced_Analysis.py")
